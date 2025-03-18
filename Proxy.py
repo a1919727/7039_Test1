@@ -140,6 +140,7 @@ while True:
       # Connect to the origin server
       # ~~~~ INSERT CODE ~~~~
       originServerSocket.connect((address,80))
+
       # ~~~~ END CODE INSERT ~~~~
       print ('Connected to origin Server')
 
@@ -150,15 +151,15 @@ while True:
       # originServerRequest is the first line in the request and
       # originServerRequestHeader is the second line in the request
       # ~~~~ INSERT CODE ~~~~
-      # originServerRequest = f"{method} {resource} {version}" 
+      originServerRequest = f"{method} {resource} {version}" 
 
-      # headers_list = requestParts[3:]
-      # headers = []
-      # for i in range(0,len(headers_list)-1,2):
-      #   headers.append(headers_list[i]+headers_list[i+1])
-      # originServerRequestHeader = "\r\n".join(headers)
-      # print(originServerRequest)
-      # print(originServerRequestHeader)
+      headers_list = requestParts[3:]
+      headers = []
+      for i in range(0,len(headers_list)-1,2):
+        headers.append(headers_list[i]+headers_list[i+1])
+      originServerRequestHeader = '\r\n'.join(headers)
+      print(originServerRequest)
+      print(originServerRequestHeader)
       # ~~~~ END CODE INSERT ~~~~
 
       # Construct the request to send to the origin server
