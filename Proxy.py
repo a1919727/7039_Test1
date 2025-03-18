@@ -158,8 +158,8 @@ while True:
       for i in range(0,len(headers_list)-1,2):
         headers.append(headers_list[i]+headers_list[i+1])
       originServerRequestHeader = '\r\n'.join(headers)
-      print(originServerRequest)
-      print(originServerRequestHeader)
+      # print(originServerRequest)
+      # print(originServerRequestHeader)
       # ~~~~ END CODE INSERT ~~~~
 
       # Construct the request to send to the origin server
@@ -180,10 +180,12 @@ while True:
 
       # Get the response from the origin server
       # ~~~~ INSERT CODE ~~~~
+      response = originServerSocket.recv(1024)
       # ~~~~ END CODE INSERT ~~~~
 
       # Send the response to the client
       # ~~~~ INSERT CODE ~~~~
+      clientSocket.sendall(response)
       # ~~~~ END CODE INSERT ~~~~
 
       # Create a new file in the cache for the requested file.
