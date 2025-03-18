@@ -168,7 +168,7 @@ while True:
         print ('> ' + line)
 
       try:
-        originServerSocket.send(request.encode())
+        originServerSocket.sendall(request.encode())
       except socket.error:
         print ('Forward request to origin failed')
         sys.exit()
