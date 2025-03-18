@@ -77,6 +77,7 @@ while True:
   URI = requestParts[1]
   version = requestParts[2]
 
+  ## print (f"requestPart:{requestParts}")
   print ('Method:\t\t' + method)
   print ('URI:\t\t' + URI)
   print ('Version:\t' + version)
@@ -138,7 +139,7 @@ while True:
       address = socket.gethostbyname(hostname)
       # Connect to the origin server
       # ~~~~ INSERT CODE ~~~~
-      originServerSocket.connect((address,proxyPort))
+      # originServerSocket.connect((address,proxyPort))
       # ~~~~ END CODE INSERT ~~~~
       print ('Connected to origin Server')
 
@@ -149,6 +150,13 @@ while True:
       # originServerRequest is the first line in the request and
       # originServerRequestHeader is the second line in the request
       # ~~~~ INSERT CODE ~~~~
+      originServerRequest = f"{method} {resource} {version}" 
+
+      headers_list = requestParts[3:]
+      headers = []
+      for i in range(0,len(headers_list)-1,2):
+        headers.append(headers_list[i]+headers_list[i+1])
+      originServerRequestHeader = "\r\n".join(headers)
       # ~~~~ END CODE INSERT ~~~~
 
       # Construct the request to send to the origin server
@@ -160,7 +168,7 @@ while True:
         print ('> ' + line)
 
       try:
-        originServerSocket.sendall(request.encode())
+        originServerSocket.send(request.encode())
       except socket.error:
         print ('Forward request to origin failed')
         sys.exit()
