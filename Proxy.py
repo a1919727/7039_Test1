@@ -19,7 +19,7 @@ proxyPort = int(args.port)
 # Create a server socket, bind it to a port and start listening
 try:
   # Create a server socket
-  # ~~~~ INSERT CODE ~~~~
+  # ~~~~ INSERT CODE ~~~
   serverSocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
   # ~~~~ END CODE INSERT ~~~~
   print ('Created socket')
@@ -118,6 +118,7 @@ while True:
     # ProxyServer finds a cache hit
     # Send back response to client 
     # ~~~~ INSERT CODE ~~~~
+    clientSocket.send(cacheData)
     # ~~~~ END CODE INSERT ~~~~
     cacheFile.close()
     print ('Sent to the client:')
