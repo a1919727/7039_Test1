@@ -56,7 +56,6 @@ while True:
   try:
     # ~~~~ INSERT CODE ~~~~
     clientSocket,addr = serverSocket.accept()
-    print(f'clientSocket:{clientSocket}')
     # ~~~~ END CODE INSERT ~~~~
     print ('Received a connection')
   except:
