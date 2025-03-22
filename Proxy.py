@@ -153,11 +153,13 @@ while True:
       # ~~~~ INSERT CODE ~~~~
       originServerRequest = f"{method} {resource} {version}" 
 
-      headers_list = requestParts[3:]
+      headers_list = requestParts[5:]
       headers = []
+      
       for i in range(0,len(headers_list)-1,2):
         headers.append(headers_list[i]+headers_list[i+1])
-      originServerRequestHeader = '\r\n'.join(headers)
+      joinHeader = '\r\n'.join(headers)
+      originServerRequestHeader = f'Host:{hostname}\r\n{joinHeader}'
       # print(originServerRequest)
       # print(originServerRequestHeader)
       # ~~~~ END CODE INSERT ~~~~
