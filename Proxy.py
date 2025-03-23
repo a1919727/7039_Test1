@@ -189,6 +189,14 @@ while True:
       no_cache = False
       if status_code == '301' or status_code == '302':
         no_cache = True
+
+      for i in decode_r:
+        if 'max-age' in i:
+            secondes = i.split('=')[-1]
+            if int(secondes) == 0:
+              no_cache = True
+        else:
+          pass
       # ~~~~ END CODE INSERT ~~~~
 
       # Send the response to the client
