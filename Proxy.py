@@ -183,6 +183,12 @@ while True:
       # Get the response from the origin server
       # ~~~~ INSERT CODE ~~~~
       response = originServerSocket.recv(1024)
+      decode_r = response.decode('utf-8').split('\r\n')
+      
+      status_code = decode_r[0].split()[1]
+      no_cache = False
+      if status_code == '301' or status_code == '302':
+        no_cache = True
       # ~~~~ END CODE INSERT ~~~~
 
       # Send the response to the client
@@ -191,18 +197,19 @@ while True:
       # ~~~~ END CODE INSERT ~~~~
 
       # Create a new file in the cache for the requested file.
-      cacheDir, file = os.path.split(cacheLocation)
-      print ('cached directory ' + cacheDir)
-      if not os.path.exists(cacheDir):
-        os.makedirs(cacheDir)
-      cacheFile = open(cacheLocation, 'wb')
+      if not no_cache:
+        cacheDir, file = os.path.split(cacheLocation)
+        print ('cached directory ' + cacheDir)
+        if not os.path.exists(cacheDir):
+            os.makedirs(cacheDir)
+        cacheFile = open(cacheLocation, 'wb')
 
       # Save origin server response in the cache file
       # ~~~~ INSERT CODE ~~~~
-      cacheFile.write(response)
+        cacheFile.write(response)    
       # ~~~~ END CODE INSERT ~~~~
-      cacheFile.close()
-      print ('cache file closed')
+        cacheFile.close()
+        print ('cache file closed')
 
       # finished communicating with origin server - shutdown socket writes
       print ('origin response received. Closing sockets')
